@@ -37,7 +37,7 @@ int posOfFirstOne(int arr[])
 
 int main()
 {
-	int arr[] = { 0, 0 };
+	int arr[] = { 0, 0, 0, 0,0, 0,0, 0,0, 0,0, 1, 1, 1, 1, 1, 1 };
 	cout << "Index = "
 		<< posOfFirstOne(arr);
 	return 0;
