@@ -2,6 +2,11 @@ class Solution{
   public:
     long long int floorSqrt(long long int x) 
     {  
+        
+        // Base cases
+        if (x == 0 || x == 1)
+            return x;
+      
         int low=0,high = x;
         int ans=-1;
         while(low<=high){
