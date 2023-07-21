@@ -1,9 +1,16 @@
+
 class Solution{
     public:
         bool isSubSequence(string A, string B) 
         {
             int n = A.length(); // Length of string A
             int m = B.length(); // Length of string B
+            
+            //edge cases
+            if(n==0) return true;
+            if(m==0) return false;
+            if(n>m)  return false;
+    
             int i = 0; // Pointer to traverse string A
         
             // Iterate through string B
