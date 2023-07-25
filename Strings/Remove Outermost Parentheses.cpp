@@ -40,8 +40,7 @@ public:
 };
 
 
-// ------------------------------------ Optimalal Approach -----------------------------------------------------------------------
-
+// ------------------------------------ Optimalal Approach ----------------------------
 string removeOuterParentheses(string s) {
   // Initialize two variables to keep track of the number of opening and closing parentheses.
   int openCount = 0;
