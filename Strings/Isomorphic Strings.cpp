@@ -13,7 +13,7 @@ bool isIsomorphic(string s, string t) {
                 return false;
         } else {
             // Check if charT is already mapped to some other character
-            for (auto it = m.begin(); it != m.end(); it++) {
+            for (auto it : m) {
                 if (it.second == charT)
                     return false;
             }
