@@ -1,41 +1,31 @@
-bool areIsomorphic(string str1, string str2)
+bool areIsomorphic(string s, string t)
 {
-    // Check if the lengths of both strings are equal
-    if (str1.length() != str2.length()) return false;
+    if (s.length() != t.length()) return false;
 
-    // Create an unordered_map to store the character mappings from str1 to str2
     unordered_map<char, char> mp;
-
-    // Iterate through each character of str1
-    for (int i = 0; i < str1.length(); i++)
-    {
-        // If the character str1[i] is already in the map
-        if (mp.find(str1[i]) != mp.end())
-        {
-            // Check if the corresponding mapped character mp[str1[i]] is equal to str2[i]
-            if (mp[str1[i]] != str2[i]) return false;
-        }
-        // If str1[i] is not in the map, add the character mapping str1[i] -> str2[i]
-        else
-        {
-            mp[str1[i]] = str2[i];
-        }
-    }
-
-    // Check whether two different keys have the same value
     unordered_set<char> st;
 
-    // Iterate through each key-value pair in the map mp
-    for (auto m : mp)
+    for (int i = 0; i < s.length(); i++)
     {
-        // If the mapped character m.second (value) is already in the set st, it means there is a conflict
-        if (st.find(m.second) != st.end()) return false;
+        // If the character s[i] is already in the map
+        if (mp.find(s[i]) != mp.end())
+        {
+            // Check if the corresponding mapped character mp[s[i]] is equal to t[i]
+            if (mp[s[i]] != t[i]) return false;
+        }
+        // If s[i] is not in the map
+        else
+        {
+            // Check if t[i] is already mapped to some other character
+            if (st.find(t[i]) != st.end()) return false;
 
-        // Otherwise, add the mapped character m.second to the set
-        st.insert(m.second);
+            // Add the character mapping s[i] -> t[i]
+            mp[s[i]] = t[i];
+            st.insert(t[i]);
+        }
     }
 
-    // If both checks passed, the strings are isomorphic, so return true
+    // If all checks passed, the strings are isomorphic, so return true
     return true;
 }
 
