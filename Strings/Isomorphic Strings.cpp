@@ -1,31 +1,27 @@
-bool areIsomorphic(string s, string t)
-{
-    if (s.length() != t.length()) return false;
+bool isIsomorphic(string s, string t) {
+    unordered_map<char, char> m;
+    int n = s.length();
 
-    unordered_map<char, char> mp;
-    unordered_set<char> st;
+    for (int i = 0; i < n; i++) {
+        char charS = s[i];
+        char charT = t[i];
 
-    for (int i = 0; i < s.length(); i++)
-    {
-        // If the character s[i] is already in the map
-        if (mp.find(s[i]) != mp.end())
-        {
-            // Check if the corresponding mapped character mp[s[i]] is equal to t[i]
-            if (mp[s[i]] != t[i]) return false;
-        }
-        // If s[i] is not in the map
-        else
-        {
-            // Check if t[i] is already mapped to some other character
-            if (st.find(t[i]) != st.end()) return false;
-
-            // Add the character mapping s[i] -> t[i]
-            mp[s[i]] = t[i];
-            st.insert(t[i]);
+        // If charS is already present in the map
+        if (m.find(charS) != m.end()) {
+            // Check if the mapping is valid
+            if (m[charS] != charT)
+                return false;
+        } else {
+            // Check if charT is already mapped to some other character
+            for (auto it = m.begin(); it != m.end(); it++) {
+                if (it.second == charT)
+                    return false;
+            }
+            // Add the mapping to the map
+            m[charS] = charT;
         }
     }
 
-    // If all checks passed, the strings are isomorphic, so return true
     return true;
 }
 
