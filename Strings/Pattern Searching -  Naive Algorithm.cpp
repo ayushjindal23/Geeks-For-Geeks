@@ -29,10 +29,30 @@ int main()
 	return 0;
 }
 
-// Output:
-// Pattern found at index 0 
-// Pattern found at index 9 
-// Pattern found at index 13 
+/*Output:
+Pattern found at index 0 
+Pattern found at index 9 
+Pattern found at index 13 
   
-// Time Complexity: O(N^2)
-// Auxiliary Space: O(1)
+Time Complexity: O(N^2)
+Auxiliary Space: O(1)
+
+ What is the best case of Naive algorithm for Pattern Searching? 
+The best case occurs when the first character of the pattern is not present in the text at all.
+
+txt[] = "AABCCAADDEE";
+pat[] = "FAA";
+The number of comparisons in the best case is O(N). 
+
+What is the worst caseof Naive algorithm for Pattern Searching? 
+The worst case of Naive Pattern Searching occurs in the following scenarios. 
+1) When all characters of the text and pattern are the same. 
+
+txt[] = "AAAAAAAAAAAAAAAAAA";
+pat[] = "AAAAA";
+2) Worst case also occurs when only the last character is different. 
+
+txt[] = "AAAAAAAAAAAAAAAAAB";
+pat[] = "AAAAB";
+The number of comparisons in the worst case is O(M * (N – M + 1)). 
+Although strings which have repeated characters are not likely to appear in English text, they may well occur in other applications (for example, in binary texts).*/
