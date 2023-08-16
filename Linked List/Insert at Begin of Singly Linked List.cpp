@@ -26,10 +26,10 @@ void printlist(Node *head){
 }
 int main() 
 { 
-	Node *head=NULL;
-	head=insertBegin(head,30);
-	head=insertBegin(head,20);
-	head=insertBegin(head,10);
+	Node *head=new Node(10);
+	head->next=new Node(20);
+	head->next->next=new Node(30);
+	head=insertBegin(head,40);
 	printlist(head);
 	return 0;
 } 
