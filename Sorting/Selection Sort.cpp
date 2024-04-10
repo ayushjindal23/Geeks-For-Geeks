@@ -1,6 +1,13 @@
 // Selection sort is a simple and efficient sorting algorithm that works by repeatedly selecting the smallest 
 // (or largest) element from the unsorted portion of the list and moving it to the sorted portion of the list. 
 
+// repeat (numOfElements - 1) times
+//   set the first unsorted element as the minimum
+//   for each of the unsorted elements
+//     if element < currentMinimum
+//       set element as new minimum
+//   swap minimum with first unsorted position
+
 #include <iostream>
 using namespace std;
 
