@@ -6,6 +6,14 @@
 
 //Basically, last element sabse phele fill hota hai
 
+// do
+//   swapped = false
+//   for i = 1 to indexOfLastUnsortedElement-1
+//     if leftElement > rightElement
+//       swap(leftElement, rightElement)
+//       swapped = true; ++swapCounter
+// while swapped
+
 #include <iostream>  // Include the iostream library for input/output operations
 using namespace std; // Use the standard namespace to avoid typing std:: before standard library functions
 
