@@ -83,4 +83,4 @@ int main() {
    - It uses a few integer variables (`n`, `l`, `r`, `sum`, `maxSum`) to store intermediate values. 
    - The space used by these variables remains constant regardless of the input array size.
 
-This makes the sliding window approach efficient in terms of both time and space.
+https://www.geeksforgeeks.org/problems/max-sum-subarray-of-size-k5313/1
