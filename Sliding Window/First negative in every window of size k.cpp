@@ -1,65 +1,85 @@
+#include <iostream>
+#include <vector>
+#include <queue>
+using namespace std;
+
 vector<int> FirstNegativeInteger(vector<int>& arr, int k) {
-    int n = arr.size(); 
-    vector<int> ans; // Initialize a vector 'ans' to store the result (first negative integer in each window).
-
-    deque<int> Di; // Create a deque 'Di' to store indices of negative numbers.
-
-    // Process first k (or first window) elements of array
-    for (int i = 0; i < k; i++) { 
-        if (arr[i] < 0) { 
-            Di.push_back(i); // If the current element is negative, push its index to the deque.
+    vector<int> result;       // To store the first negative integer for each window
+    queue<int> q;             // To store indices of negative elements in the current window
+    
+    int left = 0, right = 0;
+    
+    while (right < arr.size()) {
+        // If the current element is negative, add it to the queue (storing its index)
+        if (arr[right] < 0) {
+            q.push(right);
+        }
+        
+        // If the window size is less than k, expand the window by moving right
+        if ((right - left + 1) < k) {
+            right++;
+        }
+        // If the window size is exactly k, process the window
+        else if ((right - left + 1) == k) {
+            // If the queue is empty, it means no negative number in the current window
+            if (q.empty()) {
+                result.push_back(0);
+            } else {
+                // Otherwise, the first negative integer is at the front of the queue
+                result.push_back(arr[q.front()]);
+                
+                // Remove the element from the queue if it is going out of the window
+                if (q.front() == left) {
+                    q.pop();
+                }
+            }
+            // Slide the window by moving left and right
+            left++;
+            right++;
         }
     }
+    
+    return result;
+}
 
-    // Process rest of the elements, i.e., from arr[k] to arr[n-1]
-    for (int i = k; i < n; i++) { 
-        // If Di is not empty then the element at the front of the queue 
-        // is the first negative integer of the previous window
-        if (!Di.empty()) { 
-            ans.push_back(arr[Di.front()]); // Add the first negative integer of the previous window to the result vector.
-        } else {
-            ans.push_back(0); // If no negative integer found in the previous window, add 0 to the result vector.
-        }
-
-        // Remove the elements which are out of this window
-        while (!Di.empty() && Di.front() < (i - k + 1)) { 
-            Di.pop_front(); // Remove indices that are no longer within the current window.
-        }
-
-        // Add current element at the rear of Di if it is a negative integer
-        if (arr[i] < 0) { 
-            Di.push_back(i); // Add the index of the current negative element to the deque.
-        }
+int main() {
+    int n, k;
+    
+    // Input the size of the array
+    cout << "Enter array size n > ";
+    cin >> n;
+    
+    vector<int> arr(n);
+    cout << "Enter arr values > ";
+    
+    // Input the array values
+    for (int i = 0; i < n; i++) {
+        cin >> arr[i];
     }
-
-    // Handle the last window
-    if (!Di.empty()) { 
-        ans.push_back(arr[Di.front()]); // Add the first negative integer of the last window to the result vector.
-    } else {
-        ans.push_back(0); // If no negative integer found in the last window, add 0 to the result vector.
+    
+    // Input the window size
+    cout << "Enter window size k > ";
+    cin >> k;
+    
+    // Call the function to find the first negative integer in each window of size k
+    vector<int> result = FirstNegativeInteger(arr, k);
+    
+    // Output the result
+    cout << "Result: ";
+    for (int num : result) {
+        cout << num << " ";
     }
-
-    return ans; 
+    cout << endl;
+    
+    return 0;
 }
 
 /*
 Time Complexity: O(n)
+The array is processed once with each element being added and removed from the queue at most once.
 
-Outer Loop: The main loop iterates through the array once, from k to n-1. This takes O(n) time.
-Inner Loop (if any): The inner while loop removes elements from the front of the deque if they are no longer within the current window. In the worst case, all elements in the deque might need to be removed. However, each element is removed only once, so the total time spent in this inner loop across all iterations of the outer loop is still O(n).
-Deque Operations:
-push_back() and pop_front() operations on the deque have an average time complexity of O(1).
-Therefore, the overall time complexity of the algorithm is O(n).
-
-Space Complexity: O(n) in the worst case
-
-Deque: In the worst case, all elements in the array could be negative. In this scenario, the deque would store the indices of all negative numbers, leading to a space complexity of O(n).
-Result Vector: The result vector stores one integer for each window, resulting in O(n - k + 1) space complexity, which is O(n) in terms of input size.
-In summary:
-
-Time Complexity: O(n)
-Space Complexity: O(n) in the worst case
-
+Space Complexity: O(n)
+The space is required for the result vector (O(n)) and the queue (O(k), which is bounded by the window size k).
 
 https://www.geeksforgeeks.org/problems/first-negative-integer-in-every-window-of-size-k3345/1
 */
